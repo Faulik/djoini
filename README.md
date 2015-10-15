@@ -1,6 +1,6 @@
 # Djoini
 
-DJsOnINI is a implimentation of ActiveModel pattern and a fixture loader for json and ini formats. It implement's only a little part of pattern, so isn't usable in serious applications.
+DJsOnINI is a implementation of ActiveModel pattern and a fixture loader for json and ini formats. It implement's only a little part of pattern, so isn't usable in serious applications.
 
 Thing's that are implemented:
 - Djoini::Base class to inherit from
@@ -38,7 +38,7 @@ Or install it yourself as:
 **Important**
 Make appropriate tables or use other gem to create migrations. This gem doesn't handle migrations only mapping and loading.
 
-Also you need to create database.yml in your `PWD/config/` folder with  atleast this content to use local db with specified credentials.
+Also you need to create database.yml in your `PWD/config/` folder with  at least this content to use local db with specified credentials.
 
 ```yaml
 postgres:
@@ -75,6 +75,9 @@ user.destroy
 For more examples see tests.
 
 ### Rake task usage
+
+Example app can be found at https://github.com/Faulik/djoini_example .
+
 **Important**
 - With `mixed` loading .ini files will be loaded first.
 - All file names must be named after coresponding tables, not models.
@@ -115,4 +118,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/faulli
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
