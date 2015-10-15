@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Djoini::VERSION
   spec.authors       = ['faul']
   spec.email         = ['faullik@gmail.com']
-  spec.files         = Dir['{bin,db,lib}/**/*', 'LICENSE', 'Rakefile', 'README.md']
+  spec.files         = Dir['{bin,config,lib}/**/*', 'LICENSE', 'Rakefile', 'README.md']
   spec.test_files    = Dir['spec/**/*']
 
   spec.summary       = 'Implimentation of ActiveModel pattern and a fixture loader'
