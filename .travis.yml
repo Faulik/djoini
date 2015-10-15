@@ -9,6 +9,6 @@ install:
   - bundler
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
-  - cp spec/database.yml.travis spec/database.yml
+  - cp config/database.yml.travis config/database.yml
 script:
   - rspec
