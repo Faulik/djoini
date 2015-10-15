@@ -6,7 +6,7 @@ require_relative '../lib/djoini'
 
 conn_info = YAML.load(File.read(File.dirname(__dir__) + '/config/database.yml'))
 
-Djoini::Connection.instance.establish_connection(conn_info['postgres'])
+Djoini::Connection.instance.establish_connection(conn_info['test'])
 
 require_relative 'models/post'
 require_relative 'models/user'
