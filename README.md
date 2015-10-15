@@ -1,6 +1,6 @@
 # Djoini
 
-DJsOnINI (D is for the Dic.. Dynamic) is a implimentation of ActiveModel pattern and a fixture loader for json and ini formats. It implement's only a little part of pattern, so isn't usable in serious applications.
+DJsOnINI is a implimentation of ActiveModel pattern and a fixture loader for json and ini formats. It implement's only a little part of pattern, so isn't usable in serious applications.
 
 Thing's that are implemented:
 - Djoini::Base class to inherit from
@@ -48,6 +48,8 @@ postgres:
   password: noway
 ```
 
+Example for fixtures can be found in tests.
+
 ### Model usage:
 
 ```ruby
@@ -58,14 +60,16 @@ class Post < Djoini::Base # Inherit from Base class to use the power of ActiveRe
 end
 ```
 
-After that just use them like you normaly would with ActiveModel:
+After that just use them like you normaly would with ActiveRecord:
 
 ```ruby
-@user = User.create(name: 'Jack', last_name: 'Daniels')
-@user.name = 'Nansy'
-@user.last_name = 'Drew'
-@user.age = 30
-@user.save
+user = User.create(name: 'Jack', last_name: 'Daniels')
+user.name = 'Nansy'
+user.last_name = 'Drew'
+user.age = 30
+user.save
+
+user.destroy
 ```
 
 For more examples see tests.
@@ -73,41 +77,40 @@ For more examples see tests.
 ### Rake task usage
 **Important**
 - With `mixed` loading .ini files will be loaded first.
-- All file names must be named after coresponding tables, nor models
+- All file names must be named after coresponding tables, not models.
+
+To add task to rake append this code in `Rakefile`:
+
+```ruby
+spec = Gem::Specification.find_by_name 'djoini'
+load "#{spec.gem_dir}/lib/tasks/load.rake"
+```
 
 To load fixtures all fixtures(both ini and json) from default directory(`PWD/db/fixtures`):
 
 ```
-rake djoini:load
+bundle exec rake djoini:load
 ```
 
-To load only ini fixtures:
+To load only `ini` fixtures, overrides options in config file:
 
 ```
-rake djoini:load type=ini
+bundle exec rake djoini:load[ini]
 ```
 
 To specify location of fixtures use configuration module:
 
 ```ruby
-Djoini.config do |config|
+Djoini.configure do |config|
   config.fixtures_folder = 'path'
   config.fixtures_type = 'ini/json/mixed' 
 end
 ```
 Djoini will try to find `PWD/config/initializers/djoini.rb` and load it.
 
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake false` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/faullik/djoini. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
-
 
 ## License
 

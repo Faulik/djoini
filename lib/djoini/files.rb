@@ -6,13 +6,11 @@ module Djoini
   class Files
     attr_accessor :path
 
-    def initialize(fixtures_path = '')
+    def initialize(fixtures_path = nil)
       self.path = fixtures_path || Djoini.configuration.fixtures_folder
     end
 
     def load_files(type = 'mixed')
-      puts "Loading #{type} files from #{path}"
-
       IniLoader.new(path).load_files(find_files('ini')) unless type == 'json'
       JsonLoader.new(path).load_files find_files('json') unless type == 'ini'
     end

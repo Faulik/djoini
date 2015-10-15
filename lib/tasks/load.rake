@@ -1,25 +1,38 @@
 
 namespace :djoini do
   desc 'Load fixtures'
-  task :load do |_, args|
+  task :load, [:type] do |_, args|
     require_relative '../djoini'
 
-    require File.expand_path('/config/initializers/djoini.rb')
-    # To make sure configure was called if initializer wasn't foundw
+    load_configuration
+
+    load_database
+
+    _loader = Djoini::Files.new
+
+    _type = args[:type] || Djoini.configuration.fixtures_type
+
+    puts "Loading #{_type} files from #{Djoini.configuration.fixtures_folder}"
+
+    _loader.load_files(_type)
+  end
+
+  def load_configuration
+    _config_path = File.join(Dir.pwd, '/config/initializers/djoini.rb')
+
+    require _config_path if File.file?(_config_path)
+    # To make sure configure was called if initializer wasn't found
     Djoini.configure {}
+  end
 
-    _conn_info = YAML.load(File.read(Dir.pwd + '/config/database.yml'))
-    Djoini::Connection.instance.establish_connection(_conn_info['postgres'])
+  def load_database
+    require 'yaml'
 
-    # Path taken from configuration
-    _loader = Djoini::File.new
+    _db_config_path = File.join(Dir.pwd, '/config/database.yml')
 
-    if args[:type] == 'ini' || Djoini.configuration.fixtures_type == 'ini'
-      _loader.load_files('ini')
-    elsif args[:type] == 'json' || Djoini.configuration.fixtures_type == 'json'
-      _loader.load_files('json')
-    else
-      _loader.load_files
-    end
+    fail unless File.file?(_db_config_path)
+
+    _conn_config = YAML.load(File.read(_db_config_path))
+    Djoini::Connection.instance.establish_connection(_conn_config['postgres'])
   end
 end
