@@ -10,7 +10,7 @@ Djoini::Connection.instance.establish_connection(conn_info['test'])
 
 Djoini.db.exec("CREATE TABLE IF NOT EXISTS users
   (
-    id integer NOT NULL DEFAULT nextval('\"User_id_seq\"'::regclass),
+    id SERIAL,
     name text,
     last_name text,
     age integer,
