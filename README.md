@@ -1,4 +1,5 @@
 # Djoini
+[![Build Status](https://travis-ci.org/Faulik/djoini.svg?branch=master)](https://travis-ci.org/Faulik/djoini)
 
 DJsOnINI is a implementation of ActiveModel pattern and a fixture loader for json and ini formats. It implement's only a little part of pattern, so isn't usable in serious applications.
 
