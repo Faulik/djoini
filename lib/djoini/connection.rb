@@ -16,7 +16,7 @@ module Djoini
     def establish_connection(params)
       _adapter = params.fetch('adapter', 'postgres')
       _username = params.fetch('username')
-      _password = params.fetch('password')
+      _password = params.fetch('password', '')
       _host = params.fetch('host', 'localhost')
       _port = params.fetch('port', '5432')
       _db_name = params.fetch('db_name')
