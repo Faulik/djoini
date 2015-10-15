@@ -54,4 +54,18 @@ describe Djoini::Base do
       expect(_users[0].last_name).to eq 'Beggins'
     end
   end
+
+  context 'nonexisting table ' do
+    it 'expected to 0 rows' do
+      _table = Djoini::Table.new(name: 'NonExist')
+
+      expect(_table.columns.count).to eq 0
+    end
+
+    it 'expected to fail on insert' do
+      _table = Djoini::Table.new(name: 'NonExist')
+
+      expect { _table.insert(name: 'Bull') }.to raise_error(RuntimeError)
+    end
+  end
 end

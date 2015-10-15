@@ -4,7 +4,7 @@ require 'pry'
 
 require_relative '../lib/djoini'
 
-conn_info = YAML.load(File.read(File.dirname(__FILE__) + '/database.yml'))
+conn_info = YAML.load(File.read(File.dirname(__dir__) + '/config/database.yml'))
 
 Djoini::Connection.instance.establish_connection(conn_info['postgres'])
 
