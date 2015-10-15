@@ -8,6 +8,16 @@ conn_info = YAML.load(File.read(File.dirname(__dir__) + '/config/database.yml'))
 
 Djoini::Connection.instance.establish_connection(conn_info['test'])
 
+Djoini.db.exec("CREATE TABLE IF NOT EXISTS users
+  (
+    id integer NOT NULL DEFAULT nextval('\"User_id_seq\"'::regclass),
+    name text,
+    last_name text,
+    age integer,
+    CONSTRAINT user_pk PRIMARY KEY (id)
+  )
+")
+
 require_relative 'models/post'
 require_relative 'models/user'
 
