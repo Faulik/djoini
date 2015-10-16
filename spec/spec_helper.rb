@@ -1,12 +1,9 @@
 require 'rubygems'
-require 'yaml'
 require 'pry'
 
 require_relative '../lib/djoini'
 
-conn_info = YAML.load(File.read(File.dirname(__dir__) + '/config/database.yml'))
-
-Djoini::Connection.instance.establish_connection(conn_info['test'])
+Djoini::Connection.load_database('test')
 
 Djoini.db.exec("CREATE TABLE IF NOT EXISTS users
   (

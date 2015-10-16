@@ -1,3 +1,9 @@
+postgres:
+  adapter: postgresql
+  db_name: djoini_test
+  username: ruby
+  password: noway
+
 test:
   adapter: postgresql
   db_name: djoini_test
